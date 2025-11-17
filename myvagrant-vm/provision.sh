@@ -15,9 +15,3 @@
 
     # Save a snapshot of disk usage (human-readable) for diagnostics.
     df -h > /home/vagrant/disk_info.txt   sudo dnf update -y
-    sudo dnf install -y httpd
-    sudo systemctl enable httpd
-    sudo systemctl start httpd
-
-    free -m > /home/vagrant/memory_info.txt
-    df -h > /home/vagrant/disk_info.txt
