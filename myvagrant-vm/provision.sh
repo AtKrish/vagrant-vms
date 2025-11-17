@@ -1,6 +1,8 @@
     #!/bin/bash
     set -euo pipefail
 
+    sudo -i
+
     # Update package metadata and upgrade all installed packages non-interactively.
     sudo dnf update -y
 
@@ -12,6 +14,9 @@
 
     # Save a snapshot of memory usage (in MB) for diagnostics.
     free -m > /home/vagrant/memory_info.txt
+    cat /home/python.py >> /home/vagrant/memory_info.txt
 
     # Save a snapshot of disk usage (human-readable) for diagnostics.
     df -h > /home/vagrant/disk_info.txt   sudo dnf update -y
+
+
