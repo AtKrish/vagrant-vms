@@ -4,10 +4,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "eurolinux-vagrant/centos-stream-9"
 
   # Private network - must match VirtualBox Host-Only adapter (192.168.56.x)
-  config.vm.network "private_network", ip: "10.212.82.17"
+  config.vm.network "private_network", ip: "192.168.56.17"
 
   # Bridged network - matches your WiFi adapter
-  config.vm.network "public_network"
+  config.vm.network "private_network", type: "dhcp"
 
   # Synced folder
   config.vm.synced_folder "./scripts", "/home/vagrant/scripts", type: "rsync"
