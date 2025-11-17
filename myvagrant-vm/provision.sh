@@ -1,22 +1,24 @@
-    #!/bin/bash
-    set -euo pipefail
+  #!/bin/bash
+set -euo pipefail
 
-    sudo -i
+# Update package metadata and upgrade all installed packages
+sudo dnf update -y
 
-    # Update package metadata and upgrade all installed packages non-interactively.
-    sudo dnf update -y
+# Install Apache HTTP Server
+sudo dnf install -y httpd
 
-    # Install Apache HTTP Server (httpd) package.
-    sudo dnf install -y httpd
+# Enable httpd to start on boot and start it now
+sudo systemctl enable --now httpd
 
-    # Enable httpd so it starts on boot and start it now.
-    sudo systemctl enable --now httpd
+# Save memory usage snapshot
+free -m > /home/vagrant/memory_info.txt
 
-    # Save a snapshot of memory usage (in MB) for diagnostics.
-    free -m > /home/vagrant/memory_info.txt
+# Append python.py contents if file exists
+if [ -f /home/python.py ]; then
     cat /home/python.py >> /home/vagrant/memory_info.txt
+fi
 
-    # Save a snapshot of disk usage (human-readable) for diagnostics.
-    df -h > /home/vagrant/disk_info.txt   sudo dnf update -y
+# Save disk usage snapshot
+df -h > /home/vagrant/disk_info.txt
 
 
