@@ -11,7 +11,8 @@ sudo dnf install -y httpd
 sudo systemctl enable --now httpd
 
 # Save memory usage snapshot
-cat /home/python.py > /home/vagrant/memory_info.txt
+echo "This is a test sentence" >> /home/vagrant/memory_info.txt
+free -h >> /home/vagrant/memory_info.txt
 
 # Save disk usage snapshot
 df -h > /home/vagrant/disk_info.txt
