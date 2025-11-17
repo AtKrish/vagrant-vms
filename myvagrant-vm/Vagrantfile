@@ -1,30 +1,23 @@
 Vagrant.configure("2") do |config|
-
+  # Base box
   config.vm.box = "eurolinux-vagrant/centos-stream-9"
 
-  # REMOVE the conflicting private network
-  # or change it to 192.168.56.x if you still need host-only access
-  # config.vm.network "private_network", ip: "10.212.82.17"
-
-  # Bridged network explicitly using your WiFi adapter
+  # Networking
+  # Use host-only if needed (avoid 192.168.56.x conflicts)
+  # config.vm.network "private_network", ip: "192.168.56.10"
+  # Bridged network (change bridge to match your adapter)
   config.vm.network "public_network", bridge: "Intel(R) Wi-Fi 6 AX201 160MHz"
 
+  # Synced folder
   config.vm.synced_folder "./scripts", "/home/vagrant/scripts", type: "rsync"
 
+  # VirtualBox provider settings
   config.vm.provider "virtualbox" do |vb|
     vb.name   = "my-centos-vm"
     vb.memory = 1024
     vb.cpus   = 2
   end
 
+  # Provisioning
   config.vm.provision "shell", path: "provision.sh"
-    sudo dnf update -y
-    sudo dnf install -y httpd
-    sudo systemctl enable httpd
-    sudo systemctl start httpd
-
-    free -m > /home/vagrant/memory_info.txt
-    df -h > /home/vagrant/disk_info.txt
-  SHELL
-
 end
